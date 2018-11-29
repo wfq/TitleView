@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TitleView">
+        <attr name="isImmersion" format="boolean" />
+        <attr name="statusBarColor" format="color" />
+
+        <attr name="barStyle">
+            <enum name="light" value="0" />
+            <enum name="night" value="1" />
+            <enum name="transparent" value="2" />
+        </attr>
+
+        <!--左边视图类型-->
+        <attr name="leftType" format="enum">
+            <enum name="none" value="0" />
+            <enum name="textView" value="1" />
+            <enum name="customView" value="2" />
+        </attr>
+        <attr name="leftText" format="string" />
+        <attr name="leftTextColor" format="color" />
+        <attr name="leftTextSize" format="dimension" />
+        <attr name="leftIcon" format="reference" />
+        <attr name="leftCustomView" format="reference" />
+
+        <!--右边视图类型-->
+        <attr name="rightType" format="enum">
+            <enum name="none" value="0" />
+            <enum name="textView" value="1" />
+            <enum name="customView" value="2" />
+            <enum name="menuView" value="3" />
+        </attr>
+        <attr name="rightText" format="string" />
+        <attr name="rightTextColor" format="color" />
+        <attr name="rightTextSize" format="dimension" />
+        <attr name="rightIcon" format="reference" />
+        <attr name="rightCustomView" format="reference" />
+        <attr name="rightMenu" format="reference" />
+
+        <attr name="centerType">
+            <enum name="text" value="0" />
+            <enum name="custom" value="1" />
+        </attr>
+        <attr name="titleGravity" format="enum">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+        </attr>
+        <attr name="title" format="string" />
+        <attr name="titleColor" format="color" />
+        <attr name="titleSize" format="dimension" />
+        <attr name="subTitle" format="string" />
+        <attr name="subTitleColor" format="color" />
+        <attr name="subTitleSize" format="dimension" />
+
+        <attr name="centerCustomView" format="reference" />
+
+    </declare-styleable>
+</resources>

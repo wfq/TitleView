@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <com.wangfangqi.widget.TitleView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:centerCustomView="@layout/layout_custom_right"
+        app:centerType="text"
+        app:isImmersion="true"
+        app:leftCustomView="@layout/layout_custom_right"
+        app:leftIcon="@drawable/wfq_ic_black_back"
+        app:leftTextColor="@android:color/white"
+        app:leftType="textView"
+        app:rightCustomView="@layout/layout_custom_right"
+        app:rightMenu="@menu/test1"
+        app:rightText="王方琪方式是否"
+        app:rightTextColor="@android:color/white"
+        app:titleGravity="left"
+        app:rightType="textView"
+        app:subTitle="fosjfois就哦舒服放fajoajodjofjaosojasoifj"
+        app:title="这是Toolbar送飞机哦"
+        app:titleColor="@android:color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        android:text="哦份骄傲"/>
+</LinearLayout>

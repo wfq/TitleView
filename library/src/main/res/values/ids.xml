@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="wfq_center_view" type="id" />
+    <item name="wfq_left_view" type="id" />
+    <item name="wfq_right_view" type="id" />
+    <item name="wfq_title" type="id" />
+    <item name="wfq_sub_title" type="id" />
+</resources>
