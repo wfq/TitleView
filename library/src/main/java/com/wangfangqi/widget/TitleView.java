@@ -1,6 +1,9 @@
 package com.wangfangqi.widget;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.text.TextUtils;
@@ -12,13 +15,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.wangfangqi.widget.statusbar.StatusBarUtils;
-import com.wangfangqi.widget.style.IToolbarStyle;
-import com.wangfangqi.widget.style.ToolbarLightStyle;
+import com.wangfangqi.widget.style.ITitleViewStyle;
+import com.wangfangqi.widget.style.DefaultTitleViewLightStyle;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -43,7 +45,7 @@ import androidx.appcompat.widget.ActionMenuView;
  */
 public class TitleView extends ViewGroup implements View.OnClickListener {
 
-    private static IToolbarStyle mDefaultStyle = new ToolbarLightStyle();
+    private static ITitleViewStyle mDefaultStyle = new DefaultTitleViewLightStyle();
 
     @Override
     public void onClick(View v) {
@@ -157,22 +159,22 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
     private MenuInflater menuInflater;
 
     private int mLeftType;
-    private String mLeftText;
+    private CharSequence mLeftText;
     private int mLeftTextColor;
     private float mLeftTextSize;
     private int mLeftIcon;
 
     private int mRightType;
-    private String mRightText;
+    private CharSequence mRightText;
     private int mRightTextColor;
     private float mRightTextSize;
 
     private int mCenterType;
     private int mTitleGravity;
-    private String mTitleText;
+    private CharSequence mTitleText;
     private int mTitleColor;
     private float mTitleSize;
-    private String mSubTitleText;
+    private CharSequence mSubTitleText;
     private int mSubTitleColor;
     private float mSubTitleSize;
 
@@ -207,7 +209,7 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
 
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TitleView);
 
-        isImmersion = a.getBoolean(R.styleable.TitleView_isImmersion, true) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+        isImmersion = a.getBoolean(R.styleable.TitleView_isImmersion, false) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
         mStatusBarColor = a.getColor(R.styleable.TitleView_statusBarColor, 0);
 
         mLeftType = a.getInt(R.styleable.TitleView_leftType, TYPE_LEFT_NONE);
@@ -262,7 +264,7 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
         width = getMeasuredWidth();
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         if (heightMode != MeasureSpec.EXACTLY) {
-            height = mHeight + mStatusBarHeight;
+            height = mHeight + mStatusBarHeight + getPaddingTop();
             heightMeasureSpec = MeasureSpec.makeMeasureSpec(mHeight, MeasureSpec.EXACTLY);
         } else {
             height = getMeasuredHeight() + mStatusBarHeight;
@@ -394,7 +396,12 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
 
                 setTitleGravity(mTitleGravity);
 
-                setTitleText(mTitleText);
+                if (null == mTitleText && getContext() instanceof Activity) {
+                    // 如果当前上下文对象是Activity，就获取Activity的标题
+                    setTitleText(getActivityLabel((Activity) getContext()));
+                } else {
+                    setTitleText(mTitleText);
+                }
                 mTitleTextView.setTextColor(mTitleColor);
                 mTitleTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTitleSize);
                 // 设置粗体
@@ -573,7 +580,7 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
         setTitleText(getResources().getString(stringId));
     }
 
-    public void setTitleText(String text) {
+    public void setTitleText(CharSequence text) {
         mTitleText = text;
         if (mTitleTextView != null) {
             mTitleTextView.setText(mTitleText);
@@ -587,7 +594,7 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
         setSubTitleText(getResources().getString(stringId));
     }
 
-    public void setSubTitleText(String text) {
+    public void setSubTitleText(CharSequence text) {
         mSubTitleText = text;
         if (mSubTitleTextView != null) {
             if (TextUtils.isEmpty(mSubTitleText)) {
@@ -609,7 +616,7 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
         setLeftText(getResources().getString(stringId));
     }
 
-    public void setLeftText(String text) {
+    public void setLeftText(CharSequence text) {
         mLeftText = text;
         if (mLeftTextView != null) {
             mLeftTextView.setText(mLeftText);
@@ -626,7 +633,7 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
         setRightText(getResources().getString(stringId));
     }
 
-    public void setRightText(String text) {
+    public void setRightText(CharSequence text) {
         mRightText = text;
         if (mRightTextView != null) {
             mRightTextView.setText(mRightText);
@@ -710,6 +717,27 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
         void onTitleClick();
 
         boolean onMenuItemClick(MenuItem item);
+    }
+
+    /**
+     * 获取 Activity 的Label属性值
+     */
+    static CharSequence getActivityLabel(Activity activity) {
+        //获取清单文件中的label属性值
+        CharSequence label = activity.getTitle();
+        //如果Activity没有设置label属性，则默认会返回APP名称，需要过滤掉
+        if (label != null && !label.toString().equals("")) {
+
+            try {
+                PackageManager packageManager = activity.getPackageManager();
+                PackageInfo packageInfo = packageManager.getPackageInfo(activity.getPackageName(), 0);
+
+                if (!label.toString().equals(packageInfo.applicationInfo.loadLabel(packageManager).toString())) {
+                    return label;
+                }
+            } catch (PackageManager.NameNotFoundException ignored) {}
+        }
+        return null;
     }
 
     /**

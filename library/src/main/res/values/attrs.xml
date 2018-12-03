@@ -6,8 +6,7 @@
 
         <attr name="barStyle">
             <enum name="light" value="0" />
-            <enum name="night" value="1" />
-            <enum name="transparent" value="2" />
+            <enum name="dark" value="1" />
         </attr>
 
         <!--左边视图类型-->

@@ -22,9 +22,9 @@ public class MainActivity extends AppCompatActivity {
 //                .titleBar(titleView).init();
 //        titleView.setMenuInflater(getMenuInflater());
 //
-//        ImmersionBar.with(this)
+        ImmersionBar.with(this)
 //                .statusBarColor(R.color.colorAccent)
-//                .init();
+                .init();
 
         titleView.setOnChildClickListener(new TitleView.OnChildClickListener() {
             @Override

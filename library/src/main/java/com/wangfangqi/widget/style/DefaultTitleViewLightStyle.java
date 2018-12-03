@@ -1,6 +1,13 @@
 package com.wangfangqi.widget.style;
 
-public class ToolbarLightStyle implements IToolbarStyle {
+import com.wangfangqi.widget.R;
+
+public class DefaultTitleViewLightStyle implements ITitleViewStyle {
+
+    @Override
+    public int getNavigationIcon() {
+        return R.drawable.wfq_ic_black_back;
+    }
 
     @Override
     public int getLeftTextColor() {
@@ -24,12 +31,12 @@ public class ToolbarLightStyle implements IToolbarStyle {
 
     @Override
     public int getTitleTextColor() {
-        return 0xFF222222;
+        return 0xFF000000;
     }
 
     @Override
     public int getTitleTextSize() {
-        return 16;
+        return 20;
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.wangfangqi.widget.style;
 
-public interface IToolbarStyle {
+public interface ITitleViewStyle {
+
+    int getNavigationIcon();
 
     int getLeftTextColor();
     int getLeftTextSize();
