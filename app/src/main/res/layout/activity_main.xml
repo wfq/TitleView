@@ -23,14 +23,15 @@
         app:rightMenu="@menu/test1"
         app:rightText="王方琪方式是否"
         app:rightTextColor="@android:color/white"
-        app:title="标题"
+        app:rightType="customView"
         app:subTitle="subtitle-----"
+        app:title="标题"
         app:titleColor="@android:color/white"
         app:titleGravity="center" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="哦份骄傲"
-        android:textSize="28sp" />
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1"/>-->
+
 </LinearLayout>

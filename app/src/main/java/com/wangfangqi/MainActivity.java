@@ -18,11 +18,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final TitleView titleView = findViewById(R.id.title);
-//        ImmersionBar.with(this)
-//                .titleBar(titleView).init();
-//        titleView.setMenuInflater(getMenuInflater());
+
+        titleView.setMenuInflater(getMenuInflater());
 //
         ImmersionBar.with(this)
+                .keyboardEnable(true)
 //                .statusBarColor(R.color.colorAccent)
                 .init();
 
