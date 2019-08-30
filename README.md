@@ -4,6 +4,24 @@
 
 自定义标题栏控件，标题支持居左、居中两种模式，可自定义左、中、右多种布局类型。
 
+#### 依赖
+##### Step 1. build文件中添加JitPack仓库地址
+```
+    allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+##### Step 2. 添加依赖
+```
+    dependencies {
+	        implementation 'com.github.wfq:TitleView:Tag'
+    }
+```
+
+
 | 属性 | 类型 |
 |---|---|
 | isImmersion  | bool  |
