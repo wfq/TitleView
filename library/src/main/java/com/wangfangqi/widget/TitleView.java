@@ -18,18 +18,18 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.wangfangqi.widget.statusbar.StatusBarUtils;
-import com.wangfangqi.widget.style.ITitleViewStyle;
-import com.wangfangqi.widget.style.DefaultTitleViewLightStyle;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.ActionMenuView;
+
+import com.wangfangqi.widget.statusbar.StatusBarUtils;
+import com.wangfangqi.widget.style.DefaultTitleViewLightStyle;
+import com.wangfangqi.widget.style.ITitleViewStyle;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * 自定义TitleView, 以替代{@link android.widget.Toolbar}
@@ -201,13 +201,13 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
     }
 
     public TitleView(@NonNull Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, 0);
+        this(context, attrs, R.attr.titleView_def_style);
     }
 
     public TitleView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TitleView);
+        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TitleView, defStyleAttr, 0);
 
         isImmersion = a.getBoolean(R.styleable.TitleView_isImmersion, false) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
         mStatusBarColor = a.getColor(R.styleable.TitleView_statusBarColor, 0);
@@ -556,7 +556,7 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
     /**
      * AppCompatActivity#getMenuInflater() 的默认实现是 SupportMenuInflater 类，由于该类是隐藏的，
      * 为了兼容menu.xml文件中的 app 命名空间属性，请手动设置 AppCompatActivity 中的 MenuInflater。
-     *
+     * <p>
      * rightView类型为 {@link #TYPE_RIGHT_MENU_VIEW} 时，才需要设置此方法。
      *
      * @param inflater
@@ -735,7 +735,8 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
                 if (!label.toString().equals(packageInfo.applicationInfo.loadLabel(packageManager).toString())) {
                     return label;
                 }
-            } catch (PackageManager.NameNotFoundException ignored) {}
+            } catch (PackageManager.NameNotFoundException ignored) {
+            }
         }
         return null;
     }

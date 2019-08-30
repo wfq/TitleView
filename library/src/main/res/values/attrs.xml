@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="titleView_def_style" format="reference" />
+
     <declare-styleable name="TitleView">
         <attr name="isImmersion" format="boolean" />
         <attr name="statusBarColor" format="color" />
