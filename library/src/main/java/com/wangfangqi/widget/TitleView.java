@@ -728,7 +728,7 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
         }
     }
 
-    private interface OnChildClickListener {
+    public interface OnChildClickListener {
 
         void onLeftClick(View view);
 
