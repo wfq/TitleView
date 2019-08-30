@@ -1,14 +1,11 @@
 package com.wangfangqi;
 
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.wangfangqi.widget.TitleView;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuItemImpl;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,28 +22,6 @@ public class MainActivity extends AppCompatActivity {
                 .keyboardEnable(true)
 //                .statusBarColor(R.color.colorAccent)
                 .init();
-
-        titleView.setOnChildClickListener(new TitleView.OnChildClickListener() {
-            @Override
-            public void onLeftClick() {
-
-            }
-
-            @Override
-            public void onRightClick() {
-                titleView.setImmersion(false);
-            }
-
-            @Override
-            public void onTitleClick() {
-titleView.setImmersion(true);
-            }
-
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                return false;
-            }
-        });
     }
 
     @Override

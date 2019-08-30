@@ -51,7 +51,7 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
     public void onClick(View v) {
         if (mOnChildClickListener != null) {
             if (v.getId() == R.id.wfq_left_view) {
-                mOnChildClickListener.onLeftClick();
+                mOnChildClickListener.onLeftClick(v);
             } else if (v.getId() == R.id.wfq_right_view) {
                 mOnChildClickListener.onRightClick();
             } else if (v.getId() == R.id.wfq_title || v.getId() == R.id.wfq_sub_title) {
@@ -183,7 +183,7 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
 
     private int HORIZONTAL_PADDING;
 
-    private OnChildClickListener mOnChildClickListener;
+    private OnChildClickListener mOnChildClickListener = new SimpleChildClickListener();
 
     private final ActionMenuView.OnMenuItemClickListener mMenuViewItemClickListener =
             new ActionMenuView.OnMenuItemClickListener() {
@@ -704,13 +704,33 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
         }
     }
 
-//    public abstract class OnSimpleChildClickListener implements ExpandableListView.OnChildClickListener {
-//
-//    }
+    public static class SimpleChildClickListener implements OnChildClickListener {
+        @Override
+        public void onLeftClick(View view) {
+            if (view.getContext() instanceof Activity) {
+                ((Activity) view.getContext()).onBackPressed();
+            }
+        }
 
-    public interface OnChildClickListener {
+        @Override
+        public void onRightClick() {
 
-        void onLeftClick();
+        }
+
+        @Override
+        public void onTitleClick() {
+
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            return false;
+        }
+    }
+
+    private interface OnChildClickListener {
+
+        void onLeftClick(View view);
 
         void onRightClick();
 
