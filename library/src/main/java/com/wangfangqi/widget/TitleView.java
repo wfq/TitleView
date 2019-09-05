@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -362,7 +363,6 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
                 mLeftTextView.setTextColor(mLeftTextColor);
                 mLeftTextView.setBackgroundResource(bgPressDrawable);
                 if (mLeftIcon != 0) {
-//                    mLeftTextView.setCompoundDrawablePadding();
                     mLeftTextView.setCompoundDrawablesWithIntrinsicBounds(mLeftIcon, 0, 0, 0);
                 }
                 mLeftTextView.setPadding(HORIZONTAL_PADDING, 0, HORIZONTAL_PADDING, 0);
@@ -487,7 +487,7 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
     }
 
     @Nullable
-    private View getLeftView() {
+    public View getLeftView() {
         switch (mLeftType) {
             case TYPE_LEFT_TEXT_VIEW:
                 return mLeftTextView;
@@ -499,7 +499,7 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
     }
 
     @Nullable
-    private View getCenterView() {
+    public View getCenterView() {
         switch (mCenterType) {
             case TYPE_CENTER_TEXT_VIEW:
                 return mCenterView;
@@ -511,7 +511,7 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
     }
 
     @Nullable
-    private View getRightView() {
+    public View getRightView() {
         switch (mRightType) {
             case TYPE_RIGHT_CUSTOM_VIEW:
                 return viewCustomRight;
@@ -620,6 +620,20 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
         mLeftText = text;
         if (mLeftTextView != null) {
             mLeftTextView.setText(mLeftText);
+        }
+    }
+
+    /**
+     * 设置左布局图片，通过 drawableLeft 实现
+     *
+     * @param resId 图片资源Id
+     */
+    public void setLeftIcon(@DrawableRes int resId) {
+        if (mLeftIcon != resId) {
+            mLeftIcon = resId;
+            if (getLeftView() != null && mLeftType == TYPE_LEFT_TEXT_VIEW) {
+                mLeftTextView.setCompoundDrawablesWithIntrinsicBounds(mLeftIcon, 0, 0, 0);
+            }
         }
     }
 
