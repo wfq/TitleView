@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
+import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -452,6 +453,8 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
             case TYPE_RIGHT_CUSTOM_VIEW:
                 if (mRightCustomViewRes != 0) {
                     viewCustomRight = LayoutInflater.from(getContext()).inflate(mRightCustomViewRes, this, false);
+                }
+                if (viewCustomRight != null) {
                     addView(viewCustomRight);
                 }
                 break;
@@ -696,6 +699,38 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
         }
         mRightType = type;
         initRightView();
+    }
+
+    /**
+     * 设置右自定义布局
+     *
+     * @param view 自定义Veiw
+     */
+    public void setRightView(@NonNull View view) {
+        if (view != viewCustomRight) {
+            mRightCustomViewRes = 0;
+            if (mRightType == TYPE_RIGHT_CUSTOM_VIEW) {
+                if (viewCustomRight != null) {
+                    removeView(viewCustomCenter);
+                }
+                viewCustomRight = view;
+                initRightView();
+            } else {
+                viewCustomRight = view;
+            }
+        }
+    }
+
+    /**
+     * 设置右菜单按钮
+     *
+     * @param menuRes 菜单资源Id
+     */
+    public void setRightMenuRes(@MenuRes int menuRes) {
+        if (mRightMenuViewRes != menuRes) {
+            mRightMenuViewRes = menuRes;
+            inflateMenu();
+        }
     }
 
     /**
