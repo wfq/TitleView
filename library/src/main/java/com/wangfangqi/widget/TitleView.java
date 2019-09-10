@@ -170,6 +170,7 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
     private CharSequence mRightText;
     private int mRightTextColor;
     private float mRightTextSize;
+    private int mRightIcon;
 
     private int mCenterType;
     private int mTitleGravity;
@@ -225,6 +226,7 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
         mRightText = a.getString(R.styleable.TitleView_rightText);
         mRightTextColor = a.getColor(R.styleable.TitleView_rightTextColor, mDefaultStyle.getRightTextColor());
         mRightTextSize = a.getDimensionPixelSize(R.styleable.TitleView_rightTextSize, sp2px(context, mDefaultStyle.getRightTextSize()));
+        mRightIcon = a.getResourceId(R.styleable.TitleView_rightIcon, 0);
         mRightMenuViewRes = a.getResourceId(R.styleable.TitleView_rightMenu, 0);
         mRightCustomViewRes = a.getResourceId(R.styleable.TitleView_rightCustomView, 0);
 
@@ -443,9 +445,9 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
                 mRightTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mRightTextSize);
                 mRightTextView.setTextColor(mRightTextColor);
                 mRightTextView.setBackgroundResource(bgPressDrawable);
-//                if (a.hasValue(R.styleable.TitleView_leftIcon)) {
-//                    mLeftTextView.setCompoundDrawablesWithIntrinsicBounds(a.getResourceId(R.styleable.TitleView_leftIcon, 0), 0, 0, 0);
-//                }
+                if (mRightIcon != 0) {
+                    mRightTextView.setCompoundDrawablesWithIntrinsicBounds(mRightIcon, 0, 0, 0);
+                }
                 mRightTextView.setPadding(HORIZONTAL_PADDING, 0, HORIZONTAL_PADDING, 0);
                 mRightTextView.setOnClickListener(this);
                 addView(mRightTextView);
@@ -654,6 +656,20 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
         mRightText = text;
         if (mRightTextView != null) {
             mRightTextView.setText(mRightText);
+        }
+    }
+
+    /**
+     * 设置右布局图片，通过 drawableRight 实现
+     *
+     * @param resId 图片资源Id
+     */
+    public void setRightIcon(@DrawableRes int resId) {
+        if (mRightIcon != resId) {
+            mRightIcon = resId;
+            if (getRightView() != null && mRightType == TYPE_RIGHT_TEXT_VIEW) {
+                mRightTextView.setCompoundDrawablesWithIntrinsicBounds(mRightIcon, 0, 0, 0);
+            }
         }
     }
 
