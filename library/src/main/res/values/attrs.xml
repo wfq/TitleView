@@ -5,7 +5,9 @@
     <declare-styleable name="TitleView">
         <attr name="isImmersion" format="boolean" />
         <attr name="statusBarColor" format="color" />
+        <!--    布局高度    -->
         <attr name="height" format="dimension|reference" />
+        <attr name="horizontalPadding" format="dimension" />
 
         <attr name="barStyle">
             <enum name="light" value="0" />

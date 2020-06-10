@@ -185,7 +185,8 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
     private int mHeight;
     private int bgPressDrawable;
 
-    private int HORIZONTAL_PADDING;
+    // 无左右子View时，title默认左右margin
+    private int horizontalPadding;
 
     private OnChildClickListener mOnChildClickListener = new SimpleChildClickListener();
 
@@ -216,6 +217,7 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
         isImmersion = a.getBoolean(R.styleable.TitleView_isImmersion, false) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
         mStatusBarColor = a.getColor(R.styleable.TitleView_statusBarColor, 0);
         mHeight = a.getDimensionPixelSize(R.styleable.TitleView_height, 0);
+        horizontalPadding = a.getDimensionPixelSize(R.styleable.TitleView_horizontalPadding, dip2px(context, 12));
 
         mLeftType = a.getInt(R.styleable.TitleView_leftType, TYPE_LEFT_NONE);
         mLeftText = a.getString(R.styleable.TitleView_leftText);
@@ -251,7 +253,6 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
         if (mHeight == 0) {
             mHeight = dip2px(context, 48);
         }
-        HORIZONTAL_PADDING = dip2px(context, 12);
         // 初始化水波纹点击效果背景
         int[] attribute = new int[]{android.R.attr.selectableItemBackground};
         TypedArray a = context.getTheme().obtainStyledAttributes(attribute);
@@ -284,14 +285,14 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
             measureChild(getLeftView(), widthMeasureSpec, heightMeasureSpec);
             leftMeasureWidth = getLeftView().getMeasuredWidth();
         } else {
-            leftMeasureWidth = HORIZONTAL_PADDING;
+            leftMeasureWidth = horizontalPadding;
         }
         // 测量右侧布局
         if (getRightView() != null) {
             measureChild(getRightView(), widthMeasureSpec, heightMeasureSpec);
             rightMeasureWidth = getRightView().getMeasuredWidth();
         } else {
-            rightMeasureWidth = HORIZONTAL_PADDING;
+            rightMeasureWidth = horizontalPadding;
         }
         // 测量中间布局
         if (mTitleGravity == TYPE_TITLE_CENTER) {
@@ -321,7 +322,7 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
             getLeftView().layout(0, mStatusBarHeight + getPaddingTop(),
                     leftMeasureWidth, getMeasuredHeight());
         } else {
-            leftMeasureWidth = HORIZONTAL_PADDING;
+            leftMeasureWidth = horizontalPadding;
         }
 
         if (getRightView() != null) {
@@ -329,7 +330,7 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
             getRightView().layout(getMeasuredWidth() - rightMeasureWidth, mStatusBarHeight + getPaddingTop(),
                     getMeasuredWidth(), getMeasuredHeight());
         } else {
-            rightMeasureWidth = HORIZONTAL_PADDING;
+            rightMeasureWidth = horizontalPadding;
         }
 
         if (mTitleGravity == TYPE_TITLE_CENTER) {
@@ -372,7 +373,7 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
                 if (mLeftIcon != 0) {
                     mLeftTextView.setCompoundDrawablesWithIntrinsicBounds(mLeftIcon, 0, 0, 0);
                 }
-                mLeftTextView.setPadding(HORIZONTAL_PADDING, 0, HORIZONTAL_PADDING, 0);
+                mLeftTextView.setPadding(horizontalPadding, 0, horizontalPadding, 0);
                 mLeftTextView.setOnClickListener(this);
                 addView(mLeftTextView);
                 break;
@@ -452,7 +453,7 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
                 if (mRightIcon != 0) {
                     mRightTextView.setCompoundDrawablesWithIntrinsicBounds(mRightIcon, 0, 0, 0);
                 }
-                mRightTextView.setPadding(HORIZONTAL_PADDING, 0, HORIZONTAL_PADDING, 0);
+                mRightTextView.setPadding(horizontalPadding, 0, horizontalPadding, 0);
                 mRightTextView.setOnClickListener(this);
                 addView(mRightTextView);
                 break;

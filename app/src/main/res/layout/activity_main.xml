@@ -20,10 +20,24 @@
         app:leftText="返回"
         app:leftTextColor="@android:color/white"
         app:leftType="textView"
-        app:rightText="王方琪方式"
         app:rightIcon="@drawable/wfq_ic_black_back"
+        app:rightText="王方琪方式"
         app:rightTextColor="@android:color/white"
         app:rightType="textView"
+        app:subTitle="subtitle-----"
+        app:titleColor="@android:color/white"
+        app:titleGravity="center" />
+
+    <com.wangfangqi.widget.TitleView
+        android:id="@+id/title_center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        app:centerCustomView="@layout/layout_custom_center"
+        app:centerType="custom"
+        app:height="48dp"
+        app:horizontalPadding="0dp"
         app:subTitle="subtitle-----"
         app:titleColor="@android:color/white"
         app:titleGravity="center" />
