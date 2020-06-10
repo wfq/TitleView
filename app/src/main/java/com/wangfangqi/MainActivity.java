@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.gyf.barlibrary.ImmersionBar;
 import com.wangfangqi.widget.TitleView;
 
+import static com.wangfangqi.widget.TitleView.TYPE_CENTER_CUSTOM_VIEW;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -24,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         titleView.setMenuInflater(getMenuInflater());
+        titleView.setCenterView(R.layout.layout_custom_right);
+        titleView.setCenterViewType(TYPE_CENTER_CUSTOM_VIEW);
 //
         ImmersionBar.with(this)
                 .keyboardEnable(true)

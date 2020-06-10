@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -702,6 +703,16 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
             removeView(getCenterView());
         }
         mCenterType = type;
+        initCenterView();
+    }
+
+    public void setCenterView(@LayoutRes int layoutId) {
+        if (mCenterCustomViewRes != layoutId) {
+            mCenterCustomViewRes = layoutId;
+        }
+        if (getCenterView() != null) {
+            removeView(getCenterView());
+        }
         initCenterView();
     }
 
