@@ -6,7 +6,6 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gyf.barlibrary.ImmersionBar;
-import com.wangfangqi.widget.SimpleChildClickListener;
 import com.wangfangqi.widget.TitleView;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
         final TitleView titleView = findViewById(R.id.title);
 
-        titleView.setOnChildClickListener(new SimpleChildClickListener() {
+        titleView.setOnChildClickListener(new TitleView.SimpleChildClickListener() {
             @Override
             public void onLeftClick(View view) {
                 super.onLeftClick(view);
