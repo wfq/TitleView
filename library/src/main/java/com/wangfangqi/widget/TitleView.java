@@ -214,6 +214,7 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
 
         isImmersion = a.getBoolean(R.styleable.TitleView_isImmersion, false) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
         mStatusBarColor = a.getColor(R.styleable.TitleView_statusBarColor, 0);
+        mHeight = a.getDimensionPixelSize(R.styleable.TitleView_height, 0);
 
         mLeftType = a.getInt(R.styleable.TitleView_leftType, TYPE_LEFT_NONE);
         mLeftText = a.getString(R.styleable.TitleView_leftText);
@@ -246,7 +247,9 @@ public class TitleView extends ViewGroup implements View.OnClickListener {
     }
 
     private void initView(Context context) {
-        mHeight = dip2px(context, 48);
+        if (mHeight == 0) {
+            mHeight = dip2px(context, 48);
+        }
         HORIZONTAL_PADDING = dip2px(context, 12);
         // 初始化水波纹点击效果背景
         int[] attribute = new int[]{android.R.attr.selectableItemBackground};

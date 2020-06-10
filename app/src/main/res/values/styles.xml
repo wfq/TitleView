@@ -15,7 +15,8 @@
     </style>
 
     <style name="titleStyle">
-        <item name="title">默认的</item>
+        <item name="title">默认的99</item>
+        <item name="height">180dp</item>
     </style>
 
 </resources>
